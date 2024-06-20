@@ -1,20 +1,47 @@
 .App {
   text-align: center;
   margin: 20px;
+  font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+  font-size: larger;
+  color:  rgb(238, 150, 49);
+}
+
+.container {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.left-side, .right-side {
+  flex: 1;
+  margin: 10px;
 }
 
 textarea {
   width: 80%;
-  height: 100px;
-  margin-bottom: 10px;
+  height: 200px;
+  border-radius: 10px;
+  background-color: rgb(243, 234, 234);
+  padding: 10px;
+  font-size: large; 
+}
+
+.buttons {
+  margin-top: 20px;
 }
 
 button {
   margin: 5px;
-  padding: 10px 20px;
+  border-radius: 10px;
+  border: none;
+  padding: 20px 20px;
   cursor: pointer;
+  background-color: rgb(238, 191, 49);
+  color: white;
+  font-size: large;
+
 }
 
-textarea.highlight {
-  background-color: rgb(160, 160, 226);
+button:hover {
+  background-color: rgb(255, 204, 0);
 }
