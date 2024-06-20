@@ -7,7 +7,6 @@ function App() {
   const [isEncrypt, setIsEncrypt] = useState(true);
   const resultTextAreaRef = useRef(null);
 
-
   const encryptionKeys = {
     'e': 'enter',
     'i': 'imes',
@@ -21,7 +20,7 @@ function App() {
   };
 
   const handleEncrypt = () => {
-    let encryptedText = inputText.replace(/[eioua]/g, char => encryptionKeys[char]);
+    let encryptedText = inputText.replace(/[eioua]/g, (char) => encryptionKeys[char]);
     setResultText(encryptedText);
   };
 
@@ -63,5 +62,6 @@ function App() {
       <button onClick={handleCopy}>Copy to Clipboard</button>
     </div>
   );
-};
+}
+
 export default App;
