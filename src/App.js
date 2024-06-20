@@ -1,10 +1,12 @@
-import { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import './App.css';
 
 function App() {
   const [inputText, setInputText] = useState('');
   const [resultText, setResultText] = useState('');
   const [isEncrypt, setIsEncrypt] = useState(true);
+  const resultTextAreaRef = useRef(null);
+
 
   const encryptionKeys = {
     'e': 'enter',
@@ -32,7 +34,10 @@ function App() {
   };
 
   const handleCopy = () => {
-    navigator.clipboard.writeText(resultText);
+    if (resultTextAreaRef.current) {
+      resultTextAreaRef.current.select();
+      document.execCommand('copy');
+    }
   };
 
   return (
@@ -48,7 +53,12 @@ function App() {
         {isEncrypt ? 'Encrypt' : 'Decrypt'}
       </button>
       <br />
-      <textarea readOnly value={resultText} placeholder="Result will appear here"></textarea>
+      <textarea
+        ref={resultTextAreaRef}
+        readOnly
+        value={resultText}
+        placeholder="Result will appear here"
+      ></textarea>
       <br />
       <button onClick={handleCopy}>Copy to Clipboard</button>
     </div>

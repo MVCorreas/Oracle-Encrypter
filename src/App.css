@@ -14,3 +14,7 @@ button {
   padding: 10px 20px;
   cursor: pointer;
 }
+
+textarea.highlight {
+  background-color: rgb(160, 160, 226);
+}
