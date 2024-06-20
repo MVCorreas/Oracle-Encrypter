@@ -1,25 +1,57 @@
-import logo from './logo.svg';
+import { useState } from 'react';
 import './App.css';
 
 function App() {
+  const [inputText, setInputText] = useState('');
+  const [resultText, setResultText] = useState('');
+  const [isEncrypt, setIsEncrypt] = useState(true);
+
+  const encryptionKeys = {
+    'e': 'enter',
+    'i': 'imes',
+    'a': 'ai',
+    'o': 'ober',
+    'u': 'ufat'
+  };
+
+  const handleChange = (e) => {
+    setInputText(e.target.value);
+  };
+
+  const handleEncrypt = () => {
+    let encryptedText = inputText.replace(/[eioua]/g, char => encryptionKeys[char]);
+    setResultText(encryptedText);
+  };
+
+  const handleDecrypt = () => {
+    let decryptedText = inputText;
+    for (const [key, value] of Object.entries(encryptionKeys)) {
+      decryptedText = decryptedText.replace(new RegExp(value, 'g'), key);
+    }
+    setResultText(decryptedText);
+  };
+
+  const handleCopy = () => {
+    navigator.clipboard.writeText(resultText);
+  };
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <h1>Text Encryption App</h1>
+      <textarea value={inputText} onChange={handleChange} placeholder="Enter text here"></textarea>
+      <br />
+      <button onClick={() => setIsEncrypt(!isEncrypt)}>
+        {isEncrypt ? 'Switch to Decrypt' : 'Switch to Encrypt'}
+      </button>
+      <br />
+      <button onClick={isEncrypt ? handleEncrypt : handleDecrypt}>
+        {isEncrypt ? 'Encrypt' : 'Decrypt'}
+      </button>
+      <br />
+      <textarea readOnly value={resultText} placeholder="Result will appear here"></textarea>
+      <br />
+      <button onClick={handleCopy}>Copy to Clipboard</button>
     </div>
   );
-}
-
+};
 export default App;
